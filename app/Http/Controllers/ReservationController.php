@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reservation;
+use App\Models\Salle;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -12,7 +14,9 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $reservations = Reservation::withTrashed()->get();
+
+        return view('reservation.index', compact('reservations'));
     }
 
     /**
@@ -20,7 +24,11 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //
+        $reservations = Reservation::all();
+        $salles = Salle::all();
+        $users = User::all();
+
+        return view('reservation.create', compact('reservations', 'salles', 'users'));
     }
 
     /**
@@ -28,7 +36,18 @@ class ReservationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $reservation = new Reservation();
+
+        $reservation->h_debut = $data['h_debut'];
+        $reservation->h_fin = $data['h_fin'];
+        $reservation->salle_id = $data['salle_id'];
+        $reservation->user_id = $data['user_id'];
+
+        $reservation->save();
+        session()->flash('message', ['type' => 'success', 'text' => __('Réservation créée avec succès.')]);
+
+        return redirect()->route('reservation.index');
     }
 
     /**
@@ -60,6 +79,19 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        $reservation->delete();
+        session()->flash('message', ['type' => 'success', 'text' => __('Reservation supprimée avec succès.')]);
+
+        return redirect()->route('reservation.index');
+    }
+
+    public function restore($id)
+    {
+        $reservation = Reservation::withTrashed()->findOrFail($id);
+        $reservation->restore();
+
+        session()->flash('message', ['type' => 'success', 'text' => __('Reservation restaurée avec succès.')]);
+
+        return redirect()->route('reservation.index');
     }
 }

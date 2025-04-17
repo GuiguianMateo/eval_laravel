@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SalleController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Support\Facades\Route;
@@ -22,10 +23,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/salle/{salle}/restore', [SalleController::class, 'restore'])->withTrashed()->name('salle.restore');
     Route::get('/reservation/{reservation}/restore', [ReservationController::class, 'restore'])->withTrashed()->name('reservation.restore');
-    Route::get('/prescription/{prescription}/restore', [PrescriptionController::class, 'restore'])->withTrashed()->name('prescription.restore');
-
-    Route::get('/demande', [ConsultationController::class, 'demande'])->name('consultation.demande');
-    Route::get('/statu/{consultation}/statu', [ConsultationController::class, 'statu'])->name('consultation.statu');
 });
 
 require __DIR__.'/auth.php';
