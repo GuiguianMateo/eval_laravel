@@ -19,8 +19,8 @@ Ensure the following software is installed on your Linux system:
 
 Run the following command to clone the repository to your local system:
 
-    git clone https://github.com/AryaMerlet/evaluation_laravel.git
-    cd evaluation_laravel
+    git clone https://github.com/GuiguianMateo/eval_laravel.git
+    cd eval_laravel
 
 ### 2. Install PHP Dependencies
 
@@ -48,7 +48,7 @@ update those lines to match your configuration
 
 ###### DB_HOST=127.0.0.1
 ###### DB_PORT=3306
-###### DB_DATABASE=evaluation_laravel
+###### DB_DATABASE=eval_laravel
 ###### DB_USERNAME=root
 ###### DB_PASSWORD=
 
@@ -73,7 +73,7 @@ Run migrations to set up the database schema:
 Install and run NPM :
 
     npm install
-    npm run build
+    npm run dev
 
 Start the Laravel development server:
 
