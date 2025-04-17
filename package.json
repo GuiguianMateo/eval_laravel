@@ -33,7 +33,7 @@
         "@popperjs/core": "^2.11.8",
         "bootstrap": "^5.3.3",
         "boxicons": "^2.1.4",
-        "chart.js": "^4.4.7",
+        "chart.js": "^4.4.9",
         "datatables.net": "^2.1.8",
         "datatables.net-autofill-bs5": "^2.7.0",
         "datatables.net-bs5": "^2.1.8",
