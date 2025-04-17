@@ -22,11 +22,19 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('adminadmin'),
             ]);
 
+            $user = User::create([
+                'last_name' => 'user',
+                'first_name' => 'user',
+                'email' => 'user@gmail.com',
+                'password' => Hash::make('useruser'),
+            ]);
+
             Bouncer::allow('admin')->to([
                 'salle-restore',
             ]);
 
             Bouncer::assign('admin')->to($admin);
+            Bouncer::refresh();
 
             User::factory()
                 ->count(15)

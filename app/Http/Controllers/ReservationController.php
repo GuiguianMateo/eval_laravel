@@ -56,26 +56,26 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Reservation $reservation)
-    {
-        //
-    }
+    // public function show(Reservation $reservation)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Reservation $reservation)
-    {
-        //
-    }
+    // public function edit(Reservation $reservation)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Reservation $reservation)
-    {
-        //
-    }
+    // public function update(Request $request, Reservation $reservation)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.

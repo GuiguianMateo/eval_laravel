@@ -48,10 +48,10 @@ class SalleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Salle $salle)
-    {
-        //
-    }
+    // public function show(Salle $salle)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.

@@ -40,18 +40,16 @@
                               <td class="py-3 px-4 text-center">
                                   <div class="inline-flex gap-2">
                                       @if ($salle->deleted_at === null)
-                                          @if (Auth::user())
-                                              <a class="px-3 py-2 rounded bg-orange-500 text-white shadow hover:bg-orange-600 transition-all duration-200"
-                                                  href="{{ route('salle.edit', $salle) }}">{{ __("Modifier") }}</a>
-                                              <form action="{{ route('salle.destroy', $salle) }}" method="post" class="inline">
-                                                  @csrf
-                                                  @method('DELETE')
-                                                  <button type="submit"
-                                                          class="px-3 py-2 rounded bg-red-500 text-white shadow hover:bg-red-600 transition-all duration-200">
-                                                      {{ __("Supprimer") }}
-                                                  </button>
-                                              </form>
-                                          @endif
+                                          <a class="px-3 py-2 rounded bg-orange-500 text-white shadow hover:bg-orange-600 transition-all duration-200"
+                                              href="{{ route('salle.edit', $salle) }}">{{ __("Modifier") }}</a>
+                                          <form action="{{ route('salle.destroy', $salle) }}" method="post" class="inline">
+                                              @csrf
+                                              @method('DELETE')
+                                              <button type="submit"
+                                                      class="px-3 py-2 rounded bg-red-500 text-white shadow hover:bg-red-600 transition-all duration-200">
+                                                  {{ __("Supprimer") }}
+                                              </button>
+                                          </form>
                                       @else
                                           <form action="{{ route('salle.restore', $salle) }}" method="post" class="inline">
                                               @csrf
