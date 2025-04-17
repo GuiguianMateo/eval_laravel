@@ -12,7 +12,9 @@ class SalleController extends Controller
      */
     public function index()
     {
-        //
+        $salles = Salle::withTrashed()->get();
+
+        return view('salle.index', compact('salles'));
     }
 
     /**
@@ -20,7 +22,9 @@ class SalleController extends Controller
      */
     public function create()
     {
-        //
+        $salles = Salle::all();
+
+        return view('salle.create', compact('salles'));
     }
 
     /**
@@ -28,7 +32,17 @@ class SalleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $salle = new Salle();
+
+        $salle->nom = $data['nom'];
+        $salle->capacite = $data['capacite'];
+        $salle->surface = $data['surface'];
+
+        $salle->save();
+        session()->flash('message', ['type' => 'success', 'text' => __('Salle créée avec succès.')]);
+
+        return redirect()->route('salle.index');
     }
 
     /**
@@ -44,7 +58,7 @@ class SalleController extends Controller
      */
     public function edit(Salle $salle)
     {
-        //
+        return view('salle.edit', compact('salle'));
     }
 
     /**
@@ -52,7 +66,18 @@ class SalleController extends Controller
      */
     public function update(Request $request, Salle $salle)
     {
-        //
+        $data = $request->all();
+        $salle = Salle::findOrFail($salle->id);
+
+        $salle->nom = $data['nom'];
+        $salle->capacite = $data['capacite'];
+        $salle->surface = $data['surface'];
+
+        $salle->save();
+
+        session()->flash('message', ['type' => 'success', 'text' => __('Salle modifiée avec succès.')]);
+
+        return redirect()->route('salle.index');
     }
 
     /**
@@ -60,6 +85,19 @@ class SalleController extends Controller
      */
     public function destroy(Salle $salle)
     {
-        //
+        $salle->delete();
+        session()->flash('message', ['type' => 'success', 'text' => __('Salle supprimée avec succès.')]);
+
+        return redirect()->route('salle.index');
+    }
+
+    public function restore($id)
+    {
+        $salle = Salle::withTrashed()->findOrFail($id);
+        $salle->restore();
+
+        session()->flash('message', ['type' => 'success', 'text' => __('Salle restaurée avec succès.')]);
+
+        return redirect()->route('salle.index');
     }
 }
