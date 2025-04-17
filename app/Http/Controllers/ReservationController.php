@@ -6,6 +6,9 @@ use App\Models\Reservation;
 use App\Models\Salle;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
+use App\Mail\annule;
 
 class ReservationController extends Controller
 {
@@ -79,11 +82,20 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
+        $oldidentity = $reservation->user->identity;
+        $oldnom = $reservation->salle->nom;
+        $olddebut = $reservation->h_debut;
+        $oldfin = $reservation->h_fin;
+
         $reservation->delete();
+
+        Mail::to(Auth::user()->email)->send(new annule($reservation, $oldidentity, $oldnom, $olddebut, $oldfin));
+
         session()->flash('message', ['type' => 'success', 'text' => __('Reservation supprimée avec succès.')]);
 
         return redirect()->route('reservation.index');
     }
+
 
     public function restore($id)
     {
